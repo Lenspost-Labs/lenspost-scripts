@@ -1,0 +1,16 @@
+{
+  "name": "scripts",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "alchemy-sdk": "^2.7.0",
+    "aws-sdk": "^2.1398.0",
+    "dotenv": "^16.0.3",
+    "image-size": "^1.0.2",
+    "pg": "^8.11.1",
+    "sequelize": "^6.32.1",
+    "stopword": "^2.0.8",
+    "unique-names-generator": "^4.7.1"
+  }
+}

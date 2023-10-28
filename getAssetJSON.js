@@ -39,6 +39,7 @@ const getAssetJSON = async () => {
       tags: tags,
       author: "lens",
       type: "props",
+      feature: true,
       dimensions: [dimension.width, dimension.height],
     };
     return asset;

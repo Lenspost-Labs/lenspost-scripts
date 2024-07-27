@@ -13,12 +13,19 @@ const path = require("path");
 const axios = require("axios");
 const sizeOf = require("image-size");
 const dotenv = require("dotenv");
+const sharp = require("sharp");
+const { constants } = require("buffer");
 dotenv.config();
 
 const s3 = new aws.S3({
   accessKeyId: process.env.AWS_ACCESS_KEY,
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
 });
+
+const convertSvgBufferToPngBuffer = async (svgBuffer) => {
+  const pngBuffer = await sharp(svgBuffer).png().toBuffer();
+  return pngBuffer;
+};
 
 const uploadFile = async (fileName) => {
   let res = await axios({
@@ -28,13 +35,24 @@ const uploadFile = async (fileName) => {
 
   fs.writeFileSync("data-2.json", JSON.stringify(res.data));
 
-  let file = fs.readFileSync("data-2.json", "utf8");
+  let file = fs.readFileSync("data-2.json" , "utf8");
   file = JSON.parse(file);
+  file = JSON.parse(file);
+
+  console.log(file)
+
+
+  console.log(typeof file);
+
+  console.log(file[1]);
 
   let collectionName = file[0].name;
 
+  console.log(collectionName);
+
   for (let i = 1; i < file.length; i++) {
-    console.log(file[i].imageURL);
+    // console.log(file[i]);
+    // console.log(file[i].imageURL);
 
     let imageBuffer = await axios({
       method: "get",
@@ -47,6 +65,11 @@ const uploadFile = async (fileName) => {
     let type = dimension.type;
     console.log(type);
 
+    if (type == "svg") {
+      imageBuffer.data = await convertSvgBufferToPngBuffer(imageBuffer.data);
+      type = "png";
+    }
+    
     let nftName = file[i].title;
 
     const params = {
@@ -87,4 +110,4 @@ const uploadFile = async (fileName) => {
   });
 };
 
-uploadFile("https://lenspost.s3.ap-south-1.amazonaws.com/raw-json/data-2.json");
+uploadFile("https://lenspost.s3.ap-south-1.amazonaws.com/raw-json/data-6.json");

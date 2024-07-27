@@ -11,40 +11,40 @@ const {
 } = require("unique-names-generator");
 
 const getAssetJSON = async () => {
-  let data = await fs.readFileSync("lens-1-url.json", "utf8");
+  let data =  fs.readFileSync("phi.json", "utf8");
   data = JSON.parse(data);
 
   let assetJSON = data.map((item) => {
-    let filepath = "lens - set - 1/";
+    let filepath = "phi/";
     let filename = item.split("/");
     filename = filename[filename.length - 1];
-    console.log(filepath);
+
     console.log(filename);
 
-    let tags = ["lens"]
+    // filename = filename.replace(/[^a-zA-Z0-9]/g, "");
+    filename = filename.replace(/%20/g, " ");
+    filename = filename.replace(/%40/g, "@");
 
-    // tags = filename.split(".")[0].split("=");
-    // let tag1 = tags[1].split("-");
-    // tags.pop();
-    // tags = tags.concat(tag1);
+    console.log(filename);
 
-    // filename = filename.replace(/%20/, " ")
-    // while(filename.includes("%20")){
-    //     filename = filename.replace("%20", " ");
-    //  }
+    let tags = ["phi"];
+
     filepath = filepath + filename;
     let dimension = sizeOf(filepath);
     const asset = {
       image: item,
       tags: tags,
-      author: "lens",
+      author: "phi",
       type: "props",
       dimensions: [dimension.width, dimension.height],
+      featured: true,
+      wallet: "",
+      campaign : "phi",
     };
     return asset;
   });
 
-  fs.appendFileSync("lens-asset-1.json", JSON.stringify(assetJSON), (err) => {
+  fs.appendFileSync("phi_asset.json", JSON.stringify(assetJSON), (err) => {
     if (err) throw err;
     console.log("The file has been saved!");
   });

@@ -6,6 +6,8 @@ const s3 = new aws.S3({
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
 })
 
+console.log(process.env.AWS_ACCESS_KEY_ID)
+
 const uploadImageToS3 = async (file,key ) => {
     const params = {
         Bucket: process.env.AWS_BUCKET_NAME,

@@ -2,3 +2,6 @@ node_modules
 .env
 *.json
 !package.json
+*.png
+*.jpg
+*.sql

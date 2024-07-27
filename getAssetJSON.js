@@ -36,6 +36,7 @@ const getAssetJSON = async () => {
       tags: tags,
       author: "phi",
       type: "props",
+      feature: true,
       dimensions: [dimension.width, dimension.height],
       featured: true,
       wallet: "",

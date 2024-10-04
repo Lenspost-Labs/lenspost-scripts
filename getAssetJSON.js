@@ -11,11 +11,11 @@ const {
 } = require("unique-names-generator");
 
 const getAssetJSON = async () => {
-  let data =  fs.readFileSync("phi.json", "utf8");
+  let data =  fs.readFileSync("moxi.json", "utf8");
   data = JSON.parse(data);
 
   let assetJSON = data.map((item) => {
-    let filepath = "phi/";
+    let filepath = "moxi/";
     let filename = item.split("/");
     filename = filename[filename.length - 1];
 
@@ -27,25 +27,25 @@ const getAssetJSON = async () => {
 
     console.log(filename);
 
-    let tags = ["phi"];
+    let tags = ["moxie", "moxi"];
 
     filepath = filepath + filename;
     let dimension = sizeOf(filepath);
     const asset = {
       image: item,
       tags: tags,
-      author: "phi",
+      author: "moxie",
       type: "props",
       feature: true,
       dimensions: [dimension.width, dimension.height],
       featured: true,
       wallet: "",
-      campaign : "phi",
+      campaign : "moxie",
     };
     return asset;
   });
 
-  fs.appendFileSync("phi_asset.json", JSON.stringify(assetJSON), (err) => {
+  fs.appendFileSync("moxie_asset.json", JSON.stringify(assetJSON), (err) => {
     if (err) throw err;
     console.log("The file has been saved!");
   });

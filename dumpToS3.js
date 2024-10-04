@@ -39,13 +39,6 @@ const uploadFile = async (fileName) => {
   file = JSON.parse(file);
   file = JSON.parse(file);
 
-  console.log(file)
-
-
-  console.log(typeof file);
-
-  console.log(file[1]);
-
   let collectionName = file[0].name;
 
   console.log(collectionName);
